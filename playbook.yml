@@ -5,23 +5,29 @@
     tasks:
       - name: Create a virtual machine on given ESXi hostname
         vmware_guest:
-          hostname: 10.2.11.45
+          hostname: 192.168.6.130
           username: root
-          password: vmware0001
+          password: P@ssword
           validate_certs: no
           folder: /
-          name: test_vm_0001
-          state: poweredoff
-          guest_id: centos64Guest
+          name: vm-dorneles-pb
+          state: poweredon
+          guest_id: ubuntu64Guest
 #          esxi_hostname: 10.2.11.45
           disk:
-            - size_gb: 10
+            - size_gb: 30
               type: thin
-              datastore: datastore1
+              datastore: Datastore-Frdorneles
           hardware:
-            memory_mb: 512
-            num_cpus: 4
+            memory_mb: 2048
+            num_cpus: 2
             scsi: paravirtual
+          cdrom:
+            - controller_number: 0
+              unit_number: 0
+              state: present
+              type: iso
+              iso_path: "[Datastore-Frdorneles] ubuntu-20.04.3-live-server-amd64.iso"
           networks:
             - name: VM Network
               device_type: vmxnet3
